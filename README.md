@@ -1,4 +1,5 @@
 Chat App — Test Task for Junior Frontend Developer
+deploy via ghpages(https://cllown.github.io/chat-mini-app/)
 
 This is a simple SPA chat application that simulates a conversation between the user and a bot. Built using React and Zustand for state management.
 How to Run the Project
