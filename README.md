@@ -1,54 +1,39 @@
-# React + TypeScript + Vite
+Chat App — Test Task for Junior Frontend Developer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple SPA chat application that simulates a conversation between the user and a bot. Built using React and Zustand for state management.
+How to Run the Project
 
-Currently, two official plugins are available:
+    Clone the repository:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+git clone https://github.com/cllown/chat-app.git
+cd chat-app
 
-## Expanding the ESLint configuration
+    Install dependencies:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+npm install
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+    Start the development server:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+npm run dev
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The app will be available at http://localhost:5173 if you used Vite.
+How Autoscroll is Implemented
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+We use useRef and scrollIntoView inside a useEffect. When the messages array is updated (i.e., a new message is added), the last dummy div (referenced with bottomRef) is scrolled into view smoothly.
+
+useEffect(() => {
+  bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+}, [messages])
+
+This makes the chat window scroll only its internal content and not the whole page.
+Why Zustand
+
+I chose Zustand over Redux for this task because:
+
+    Zustand is much lighter and simpler to set up (no boilerplate, reducers, or actions required).
+
+    It has a very intuitive API.
+
+    Perfect fit for small to medium apps where Redux might be overkill.
+
+    Zustand supports selective re-renders and persistent stores out of the box.
